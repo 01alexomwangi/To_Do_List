@@ -18,43 +18,48 @@ class TaskController extends Controller
 
     public function create()
     {
-        return view('tasks.create');
+        $task = null;
+        return view('tasks.create',compact('task'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
+        $title = $request->input('title');
+        $description = $request->input('description');
 
-        Task::create($validated);
+        $task = new Task();
+        $task->title = $title;
+        $task->description = $description;
+        $task->save();
 
-        return redirect()->route('tasks.index');
+        return redirect('/tasks');
     }
 
-    public function edit(Task $task)
+    public function edit($id)
     {
-        return view('tasks.edit', compact('task'));
+        $task = Task::where('id', '=', $id)->first();
+        return view('tasks.create', compact('task'));
     }
 
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
+        $new_title = $request->input('title');
+        $new_description = $request->input('description');
 
-        $task->update($validated);
+        $task = Task::where('id', '=', $id)->first();
+        $task->title = $new_title;
+        $task->description = $new_description;
+        $task->save();
 
-        return redirect()->route('tasks.index');
+        return redirect('/tasks');
     }
 
-    public function destroy(Task $task)
+    public function delete($id)
     {
+        $task = Task::findOrFail($id);
         $task->delete();
 
-        return redirect()->route('tasks.index');
+        return redirect('/tasks');
     }
 }
 
