@@ -10,7 +10,7 @@
 <div class="bg-white p-8 rounded-xl shadow w-full max-w-md">
     <h1 class="text-2xl font-bold text-center mb-6">@if($task != null) Update Task @else Create Task @endif</h1>
 
-    <form @if($task != null) action="/tasks/{{ $task->id }}" @else action="/tasks" @endif  method="POST" class="space-y-4">
+    <form @if($task != null) action="{{ route('tasks.update',$task->id) }}" @else action="{{ route('tasks.store') }}" @endif  method="POST" class="space-y-4">
 
         @csrf
 

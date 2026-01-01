@@ -32,7 +32,7 @@ class TaskController extends Controller
         $task->description = $description;
         $task->save();
 
-        return redirect('/tasks');
+        return redirect()->route('tasks.index');
     }
 
     public function edit($id)
@@ -51,7 +51,7 @@ class TaskController extends Controller
         $task->description = $new_description;
         $task->save();
 
-        return redirect('/tasks');
+        return redirect()->route('tasks.index');
     }
 
     public function delete($id)
@@ -59,7 +59,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $task->delete();
 
-        return redirect('/tasks');
+        return redirect()->route('tasks.index');
     }
 }
 

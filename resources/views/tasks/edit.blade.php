@@ -10,7 +10,7 @@
 <div class="bg-white p-8 rounded-xl shadow w-full max-w-md">
     <h1 class="text-2xl font-bold text-center mb-6">Edit Task</h1>
 
-    <form action="/tasks/{{ $task->id }}" method="POST" class="space-y-4">
+    <form action="{{ route('tasks.edit',$task->id) }}/tasks/{{ $task->id }}" method="POST" class="space-y-4">
         @csrf
         @method('PUT')
 

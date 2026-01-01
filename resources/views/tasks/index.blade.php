@@ -11,7 +11,7 @@
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold">To-Do List</h1>
 
-        <a href="/tasks/create"
+        <a href="{{route('tasks.create')}}"
            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
             ➕ Add Task
         </a>
@@ -25,12 +25,12 @@
             </div>
 
             <div class="flex gap-2">
-                <a href="/tasks/{{ $task->id }}/edit"
+                <a href="{{ route('tasks.edit',$task->id) }}"
                    class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">
                     Edit
                 </a>
 
-                <form action="/tasks/{{ $task->id }}" method="POST">
+                <form action="{{ route('tasks.delete',$task->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button
